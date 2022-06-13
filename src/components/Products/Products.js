@@ -1,9 +1,25 @@
-import React from 'react'
+import React from "react";
 
 const Products = () => {
   return (
-    <div>Products</div>
-  )
-}
+    <>
+      <h2 className="text-center my-5">Listado de productos</h2>
+      <table className="table table-striped text-center">
 
-export default Products
+        <thead className="bg-primary table-dark">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          
+        </tbody>
+      </table>
+    </>
+  );
+};
+
+export default Products;
