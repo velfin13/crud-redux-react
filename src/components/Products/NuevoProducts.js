@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 //aciones de ridux
 import { crearNuevoProductoAction } from "../../actions/productoActions";
 
-const NuevoProducts = () => {
+const NuevoProducts = ({ history }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
 
@@ -26,6 +26,7 @@ const NuevoProducts = () => {
     }
 
     agregarProductos({ name, price });
+    history.push("/");
   };
 
   return (
@@ -71,7 +72,9 @@ const NuevoProducts = () => {
             </form>
             {cargando ? <p>Cargando ...</p> : null}
             {error ? (
-              <p className="alert alert-danger p-2 mt-3 text-center">Hubo un Error</p>
+              <p className="alert alert-danger p-2 mt-3 text-center">
+                Hubo un Error
+              </p>
             ) : null}
           </div>
         </div>

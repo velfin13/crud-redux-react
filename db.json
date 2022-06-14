@@ -1,3 +1,54 @@
 {
-  "productos": []
+  "productos": [
+    {
+      "name": "Aceite coco",
+      "price": 32,
+      "id": 1
+    },
+    {
+      "name": "Aceite coco",
+      "price": 32,
+      "id": 2
+    },
+    {
+      "name": "jjh",
+      "price": 4,
+      "id": 3
+    },
+    {
+      "name": "jjh",
+      "price": 4,
+      "id": 4
+    },
+    {
+      "name": "jjh",
+      "price": 4,
+      "id": 5
+    },
+    {
+      "name": "test",
+      "price": 7346,
+      "id": 6
+    },
+    {
+      "name": "test",
+      "price": 7346,
+      "id": 7
+    },
+    {
+      "name": "test",
+      "price": 7346,
+      "id": 8
+    },
+    {
+      "name": "test",
+      "price": 7346,
+      "id": 9
+    },
+    {
+      "name": "productos",
+      "price": 6,
+      "id": 10
+    }
+  ]
 }

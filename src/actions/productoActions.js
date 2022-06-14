@@ -13,7 +13,7 @@ export const crearNuevoProductoAction = (producto) => {
 
     try {
       //insertar en la api
-      await axios.post("/producto", producto);
+      await axios.post("/productos", producto);
 
       //si todo sale bien
       dispatch(agregarProductoExito(producto));
