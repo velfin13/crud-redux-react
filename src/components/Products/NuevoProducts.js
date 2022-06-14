@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //aciones de ridux
 import { crearNuevoProductoAction } from "../../actions/productoActions";
 
 const NuevoProducts = () => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+
   // utilizar usedispacth y te devuelve una funcion
   const dispatch = useDispatch();
 
+  //acceder al state de redux
+  const cargando = useSelector((state) => state.productos.loading);
+  const error = useSelector((state) => state.productos.error);
+
   // manda a llamar la funcion de prodcutosAccions
-  const agregarProductos = () => dispatch(crearNuevoProductoAction());
+  const agregarProductos = (producto) =>
+    dispatch(crearNuevoProductoAction(producto));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    agregarProductos();
+    if (name.trim() === "" || price < 1 || isNaN(price)) {
+      return;
+    }
+
+    agregarProductos({ name, price });
   };
 
   return (
@@ -33,6 +45,8 @@ const NuevoProducts = () => {
                   placeholder="Ingresa el Nombre"
                   className="form-control"
                   name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -43,6 +57,8 @@ const NuevoProducts = () => {
                   placeholder="Ingresa el Precio"
                   className="form-control"
                   name="price"
+                  value={price}
+                  onChange={(e) => setPrice(Number(e.target.value))}
                 />
               </div>
 
@@ -53,6 +69,10 @@ const NuevoProducts = () => {
                 Agregar
               </button>
             </form>
+            {cargando ? <p>Cargando ...</p> : null}
+            {error ? (
+              <p className="alert alert-danger p-2 mt-3 text-center">Hubo un Error</p>
+            ) : null}
           </div>
         </div>
       </div>

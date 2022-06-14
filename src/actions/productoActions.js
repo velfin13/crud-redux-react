@@ -1,12 +1,48 @@
 import {
-  AGREAR_PRODUCT,
-  AGREAR_PRODUCT_EXITO,
-  AGREAR_PRODUCT_ERROR,
+  AGREGAR_PRODUCT,
+  AGREGAR_PRODUCT_EXITO,
+  AGREGAR_PRODUCT_ERROR,
 } from "../types";
+import axios from "../config/axios";
+import Swal from 'sweetalert2'
 
 // crear nuevo producto
-export const crearNuevoProductoAction = () => {
-  return () => {
-    console.log("desde actions");
+export const crearNuevoProductoAction = (producto) => {
+  return async (dispatch) => {
+    dispatch(agregarProducto());
+
+    try {
+      //insertar en la api
+      await axios.post("/productos", producto);
+
+      //si todo sale bien
+      dispatch(agregarProductoExito(producto));
+      //agregar alerta
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Agregado con exito!!',
+        showConfirmButton: false,
+        timer: 1700
+      })
+    } catch (error) {
+      console.log(error);
+      //si hay un error
+      dispatch(agregarProductoError());
+    }
   };
 };
+
+const agregarProducto = () => ({
+  type: AGREGAR_PRODUCT,
+  payload: { loading: true, error: null },
+});
+
+const agregarProductoExito = (producto) => ({
+  type: AGREGAR_PRODUCT_EXITO,
+  payload: { producto, loading: false },
+});
+const agregarProductoError = () => ({
+  type: AGREGAR_PRODUCT_ERROR,
+  payload: { loading: false, error: true },
+});
