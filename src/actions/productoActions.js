@@ -13,7 +13,7 @@ export const crearNuevoProductoAction = (producto) => {
 
     try {
       //insertar en la api
-      await axios.post("/productos", producto);
+      await axios.post("/producto", producto);
 
       //si todo sale bien
       dispatch(agregarProductoExito(producto));
@@ -26,9 +26,15 @@ export const crearNuevoProductoAction = (producto) => {
         timer: 1700
       })
     } catch (error) {
-      console.log(error);
       //si hay un error
       dispatch(agregarProductoError());
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Ups, No se pudo ingresar el producto!!',
+        showConfirmButton: false,
+        timer: 1700
+      })
     }
   };
 };
