@@ -5,7 +5,11 @@ import {
   COMENZAR_DESCARGA_PRODUCTOS,
   DESCARGA_PRODUCTOS_ERROR,
   DESCARGA_PRODUCTOS_EXITO,
+  PRODUCTO_ELIMINAR,
+  PRODUCTO_ELIMINAR_ERROR,
+  PRODUCTO_ELIMINAR_EXITO,
 } from "../types";
+
 import axios from "../config/axios";
 import Swal from "sweetalert2";
 
@@ -83,4 +87,34 @@ const descargaProductosExitosa = (productos) => ({
 const descargaProductosEror = () => ({
   type: DESCARGA_PRODUCTOS_ERROR,
   payload: { loading: false, error: true },
+});
+
+// SELECCIONA Y ELIMINA EL PRODUCTO
+export const borrarProductoAction = (id) => {
+  return async (dispatch) => {
+    dispatch(obtenerProductoEliminar(id));
+
+    try {
+      await axios.delete(`/producto/${id}`);
+      dispatch(productoEliminarExito());
+      Swal.fire("Eliminado!", "Regsitro eliminado correctamente.", "success");
+    } catch (error) {
+      dispatch(elimiarProductoError());
+      Swal.fire("Ups!", "Hubo un error en el servidor.", "error");
+    }
+  };
+};
+
+const obtenerProductoEliminar = (id) => ({
+  type: PRODUCTO_ELIMINAR,
+  payload: { id },
+});
+
+const productoEliminarExito = () => ({
+  type: PRODUCTO_ELIMINAR_EXITO,
+  payload: { error: false },
+});
+
+const elimiarProductoError = () => ({
+  type: PRODUCTO_ELIMINAR_ERROR,
 });
