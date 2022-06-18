@@ -3,6 +3,9 @@ import {
   AGREGAR_PRODUCT,
   AGREGAR_PRODUCT_EXITO,
   AGREGAR_PRODUCT_ERROR,
+  COMENZAR_DESCARGA_PRODUCTOS,
+  DESCARGA_PRODUCTOS_ERROR,
+  DESCARGA_PRODUCTOS_EXITO,
 } from "../types";
 
 //cada reducer tiene su propio state
@@ -27,6 +30,25 @@ export default (state = initialValues, action) => {
         productos: [...state.productos, action.payload.producto],
       };
     case AGREGAR_PRODUCT_ERROR:
+      return {
+        ...state,
+        loading: action.payload.loading,
+        error: action.payload.error,
+      };
+    case COMENZAR_DESCARGA_PRODUCTOS:
+      return {
+        ...state,
+        loading: action.payload.loading,
+      };
+    case DESCARGA_PRODUCTOS_EXITO:
+      return {
+        ...state,
+        loading: action.payload.loading,
+        error: action.payload.error,
+        productos: action.payload.productos,
+      };
+
+    case DESCARGA_PRODUCTOS_ERROR:
       return {
         ...state,
         loading: action.payload.loading,
