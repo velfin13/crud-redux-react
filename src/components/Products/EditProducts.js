@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editarProductoApiAction } from "../../actions/productoActions";
+import { useHistory } from "react-router-dom";
 
 const EditProducts = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  //nuevo state de producto
+  const [productoState, setProductoState] = useState({
+    name: "",
+    price: "",
+  });
+
+  const handleEditarProducto = (e) => {
+    e.preventDefault();
+    dispatch(editarProductoApiAction(productoState));
+  };
+
+  const productoEditar = useSelector((state) => state.productos.productoEditar);
+  if (!productoEditar) {
+    history.push("/");
+  }
+
+  useEffect(() => {
+    setProductoState(productoEditar);
+  }, [productoEditar]);
+
+  //LEER LOS DATOS DEL FORMULARIO
+  const onchangeFormulario = (e) => {
+    setProductoState({ ...productoState, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
@@ -10,7 +41,7 @@ const EditProducts = () => {
               Editar producto
             </h2>
 
-            <form>
+            <form onSubmit={handleEditarProducto}>
               <div className="form-group">
                 <label>Nombre:</label>
                 <input
@@ -18,6 +49,8 @@ const EditProducts = () => {
                   placeholder="Ingresa el Nombre"
                   className="form-control"
                   name="name"
+                  onChange={onchangeFormulario}
+                  value={productoState.name}
                 />
               </div>
 
@@ -28,6 +61,8 @@ const EditProducts = () => {
                   placeholder="Ingresa el Precio"
                   className="form-control"
                   name="price"
+                  onChange={onchangeFormulario}
+                  value={productoState.price}
                 />
               </div>
 

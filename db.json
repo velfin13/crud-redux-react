@@ -2,8 +2,13 @@
   "productos": [
     {
       "name": "twt",
-      "price": 8,
+      "price": "88",
       "id": 1
+    },
+    {
+      "name": "malena",
+      "price": 74,
+      "id": 2
     }
   ]
 }
