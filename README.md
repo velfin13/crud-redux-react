@@ -2,8 +2,6 @@
 
 ## Para levantar el servidor use
 
-Use json-server para la api
-
 ```bash
 npm install -g json-server
 ```
