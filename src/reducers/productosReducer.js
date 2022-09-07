@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error:false,
         productos: [...state.productos, action.payload],
       };
     case AGREGAR_PRODUCTO_ERROR:
