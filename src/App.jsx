@@ -4,17 +4,27 @@ import NuevoProducto from "./components/NuevoProducto";
 import EditarProducto from "./components/EditarProducto";
 import Productos from "./components/Productos";
 
+//redux
+import { Provider } from "react-redux";
+import store from "./store";
+
 function App() {
   return (
     <Router>
-      <Header />
-      <div className="container">
-        <Switch>
-          <Route path="/" exact component={Productos} />
-          <Route path="/productos/nuevo" exact component={NuevoProducto} />
-          <Route path="/productos/editar/:id" exact component={EditarProducto} />
-        </Switch>
-      </div>
+      <Provider store={store}>
+        <Header />
+        <div className="container">
+          <Switch>
+            <Route path="/" exact component={Productos} />
+            <Route path="/productos/nuevo" exact component={NuevoProducto} />
+            <Route
+              path="/productos/editar/:id"
+              exact
+              component={EditarProducto}
+            />
+          </Switch>
+        </div>
+      </Provider>
     </Router>
   );
 }
