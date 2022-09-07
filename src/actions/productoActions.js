@@ -3,7 +3,7 @@ import {
   AGREGAR_PRODUCTO_EXITO,
   AGREGAR_PRODUCTO_ERROR,
 } from "../types";
-
+import Swal from 'sweetalert2'
 import axios from "../config/axios";
 
 // crear nuevos productos
@@ -17,9 +17,18 @@ export const crearNuevoProductoAction = (producto) => {
 
       // si todo sale bien
       dispatch(agregarProductoExito(producto));
+      Swal.fire(
+        'Producto agregado!',
+        'Se ha registrado correctamente!',
+        'success'
+      )
     } catch (error) {
-      console.log(error);
       dispatch(agregarProductoError(true));
+      Swal.fire(
+        'Ups!',
+        'Ha ocurrido un error!',
+        'error'
+      )
     }
   };
 };
