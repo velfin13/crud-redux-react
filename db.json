@@ -1,24 +1,3 @@
 {
-  "productos": [
-    {
-      "id": 1,
-      "name": "Jugo de Zanahoria",
-      "price": "31111"
-    },
-    {
-      "name": "prueb",
-      "price": 454,
-      "id": 2
-    },
-    {
-      "name": "test",
-      "price": 7,
-      "id": 3
-    },
-    {
-      "name": "jhjh",
-      "price": 8,
-      "id": 4
-    }
-  ]
+  "productos": []
 }

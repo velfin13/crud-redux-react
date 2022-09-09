@@ -15,10 +15,16 @@ const Productos = () => {
 
   //obtener state
   const productos = useSelector((state) => state.productos.productos);
+  const error = useSelector((state) => state.productos.error);
+  const cargando = useSelector((state) => state.productos.loading);
 
   return (
     <>
       <h2 className="text-center my-5">Listado de Productos</h2>
+      {error && (
+        <p className="alert alert-danger p2 mt-3 text-center ">Hubo un error</p>
+      )}
+       {cargando && <p>Cargando ....</p>}
       <table className="table table-striped text-center">
         <thead className="bg-primary table-dark">
           <tr>

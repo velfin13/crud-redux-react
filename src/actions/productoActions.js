@@ -5,6 +5,9 @@ import {
   COMENZAR_DESCARGA_PRODUCTOS,
   COMENZAR_DESCARGA_PRODUCTOS_ERROR,
   COMENZAR_DESCARGA_PRODUCTOS_EXITO,
+  OBTENER_PRODUCTO_ELIMINAR,
+  OBTENER_PRODUCTO_ELIMINAR_EXITO,
+  OBTENER_PRODUCTO_ELIMINAR_ERROR,
 } from "../types";
 import Swal from "sweetalert2";
 import axios from "../config/axios";
@@ -71,4 +74,46 @@ const descargaProductoExito = (producto) => ({
 const descargaProductoError = (status) => ({
   type: COMENZAR_DESCARGA_PRODUCTOS_ERROR,
   payload: status,
+});
+
+//FUNCION ELIMINAR
+export const borrarProductoAction = (id) => {
+  return async (dispatch) => {
+    Swal.fire({
+      title: "Estas seguro de eliminar?",
+      text: "Una vez eliminado no se podra recuperar!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminalo!",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        dispatch(obtenetProductoEliminar(id));
+
+        try {
+          await axios.delete(`/productos/${id}`);
+          dispatch(obtenetProductoEliminarExito());
+          Swal.fire("Eliminado!", "Ha sido eliminado con exito.", "success");
+        } catch (error) {
+          dispatch(obtenetProductoEliminarError());
+          Swal.fire("Upps!", "Hubo un error.", "error");
+        }
+      }
+    });
+  };
+};
+const obtenetProductoEliminar = (id) => ({
+  type: OBTENER_PRODUCTO_ELIMINAR,
+  payload: id,
+});
+
+const obtenetProductoEliminarExito = () => ({
+  type: OBTENER_PRODUCTO_ELIMINAR_EXITO,
+});
+
+const obtenetProductoEliminarError = () => ({
+  type: OBTENER_PRODUCTO_ELIMINAR_ERROR,
+  payload: true,
 });
