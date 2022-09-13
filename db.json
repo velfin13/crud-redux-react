@@ -1,14 +1,3 @@
 {
-  "productos": [
-    {
-      "name": "malena 3",
-      "price": 7237623,
-      "id": 1
-    },
-    {
-      "name": "g376672",
-      "price": 7632732,
-      "id": 2
-    }
-  ]
+  "productos": []
 }
