@@ -1,16 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { borrarProductoAction } from "../actions/productoActions";
+import {
+  borrarProductoAction,
+  obtenerProductoEditar,
+} from "../actions/productoActions";
 
 const Producto = ({ producto }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // cuando el usuario precione eliminar
   const confirmEliminarProducto = (id) => {
     dispatch(borrarProductoAction(id));
+  };
+
+  // redireccionar usuario a edicion
+  const redireccionEditarProducto = (producto) => {
+    dispatch(obtenerProductoEditar(producto));
+    history.push(`/productos/editar/${producto.id}`);
   };
 
   const { name, price, id } = producto;
@@ -21,9 +31,13 @@ const Producto = ({ producto }) => {
         <span className="font-weight-bold">$ {price}</span>
       </td>
       <td className="acciones">
-        <Link to={`/productos/editar/${id}`} className="btn btn-primary mr-2">
+        <button
+          type="button"
+          onClick={() => redireccionEditarProducto(producto)}
+          className="btn btn-primary mr-2"
+        >
           Editar
-        </Link>
+        </button>
         <button
           className="btn btn-danger"
           type="button"
